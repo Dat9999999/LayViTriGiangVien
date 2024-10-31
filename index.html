@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Lấy vị trí của giảng viên</title>
+</head>
+
+<body>
+    <h1>Vị trí hiện tại của bạn</h1>
+
+    <button onclick="getLocation()">Lấy vị trí</button>
+    <p id="location-info"></p>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendPosition, useIPForLocation);
+            } else {
+                document.getElementById("location-info").innerHTML = "Trình duyệt không hỗ trợ GPS.";
+                useIPForLocation();
+            }
+        }
+
+        function sendPosition(position) {
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            let mssv = document.getElementById("studentId").value;
+            document.getElementById("location-info").innerHTML =
+                "Vĩ độ: " + latitude + "<br>Kinh độ: " + longitude;
+
+            // Gửi tọa độ về server để điểm danh
+            fetch('http://localhost:5000/api/attendance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    latitude: latitude,
+                    longitude: longitude,
+                    mssv: mssv
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Điểm danh thành công:", data);
+                })
+                .catch(error => {
+                    console.error("Lỗi khi điểm danh:", error);
+                });
+        }
+
+        function useIPForLocation() {
+            fetch("https://ipinfo.io/json?token=YOUR_IPINFO_TOKEN")
+                .then(response => response.json())
+                .then(data => {
+                    const [latitude, longitude] = data.loc.split(",");
+                    document.getElementById("location-info").innerHTML =
+                        "Vĩ độ từ IP: " + latitude + "<br>Kinh độ từ IP: " + longitude;
+
+                    // Gửi tọa độ về server để điểm danh
+                    fetch('http://localhost:5000/api/attendance', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            latitude: parseFloat(latitude),
+                            longitude: parseFloat(longitude)
+                        })
+                    });
+                })
+                .catch(error => {
+                    console.error("Lỗi khi lấy vị trí từ IP:", error);
+                });
+        }
+    </script>
+</body>
+
+</html>

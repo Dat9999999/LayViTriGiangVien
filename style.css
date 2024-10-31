@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    /* Chọn font chữ cho toàn bộ trang */
+    background-color: #f4f4f4;
+    /* Màu nền của trang */
+    margin: 0;
+    /* Xóa khoảng cách mặc định */
+    padding: 20px;
+    /* Khoảng cách bên trong trang */
+}
+
+h1 {
+    color: #333;
+    /* Màu chữ tiêu đề */
+    text-align: center;
+    /* Căn giữa tiêu đề */
+}
+
+label {
+    font-size: 18px;
+    /* Kích thước chữ cho label */
+    display: block;
+    /* Hiển thị label như một khối */
+    margin-bottom: 10px;
+    /* Khoảng cách giữa label và input */
+}
+
+input[type="text"] {
+    width: 100%;
+    /* Chiều rộng 100% cho ô nhập */
+    padding: 10px;
+    /* Khoảng cách bên trong ô nhập */
+    border: 1px solid #ccc;
+    /* Đường viền xung quanh ô nhập */
+    border-radius: 5px;
+    /* Bo tròn các góc */
+    margin-bottom: 20px;
+    /* Khoảng cách giữa ô nhập và nút */
+}
+
+button {
+    background-color: #4CAF50;
+    /* Màu nền cho nút */
+    color: white;
+    /* Màu chữ cho nút */
+    padding: 15px 20px;
+    /* Khoảng cách bên trong nút */
+    border: none;
+    /* Xóa đường viền */
+    border-radius: 5px;
+    /* Bo tròn các góc */
+    cursor: pointer;
+    /* Hiển thị con trỏ chuột khi di chuột qua nút */
+    width: 100%;
+    /* Chiều rộng 100% cho nút */
+}
+
+button:hover {
+    background-color: #45a049;
+    /* Màu nền khi di chuột qua nút */
+}
+
+.container {
+    max-width: 400px;
+    /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto;
+    /* Căn giữa container */
+    background-color: white;
+    /* Màu nền cho container */
+    padding: 20px;
+    /* Khoảng cách bên trong container */
+    border-radius: 8px;
+    /* Bo tròn các góc của container */
+    box-shadow
